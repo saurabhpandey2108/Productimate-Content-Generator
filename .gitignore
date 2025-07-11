@@ -1,0 +1,7 @@
+__pycache__/ 
+*.pyc 
+data/output/ 
+uv.lock 
+faiss_index/ 
+tmp_*.pdf 
+.env 
