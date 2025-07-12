@@ -29,7 +29,7 @@
 ```
 Productimate-Content-Generator/
 ├── app/               # Streamlit UI components
-│   └── app.py         # Main Streamlit app file
+│   └── streamlit_app.py         # Main Streamlit app file
 ├── api/               # FastAPI server
 │   ├── main.py        # API entrypoint
 │   └── models.py      # Pydantic models
