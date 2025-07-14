@@ -1,8 +1,8 @@
 from langchain_core.prompts import PromptTemplate
 
 instagram_content_prompt = PromptTemplate(
-    input_variables=["content_topic", "tone", "persona", "context", "feedback_context"],
-    template="""Create a 3-line Instagram caption about this topic: "{content_topic}", focusing on SEO importance, conversion benefits, and our SEO-friendly website product.
+    input_variables=["content_topic", "tone", "persona", "length", "context", "feedback_context"],
+    template="""Create a {length} Instagram caption about this topic: "{content_topic}", focusing on SEO importance, conversion benefits, and our SEO-friendly website product.
 Use a {tone} tone and write for a {persona}, leveraging the context provided.
 Include emojis, a compelling hook, 1–2 SEO or conversion tips, a call to action (e.g., DM us), and use these high-performing examples for inspiration: {feedback_context}
 Suggest 3–5 relevant hashtags.
@@ -48,8 +48,8 @@ Context: {context}
 )
 
 facebook_content_prompt = PromptTemplate(
-    input_variables=["content_topic", "tone", "audience", "context", "feedback_context"],
-    template="""Create a Facebook post about {content_topic}, emphasizing SEO importance, conversion benefits, and our SEO-friendly website product.
+    input_variables=["content_topic", "tone", "audience", "length", "context", "feedback_context"],
+    template="""Create a {length} Facebook post about {content_topic}, emphasizing SEO importance, conversion benefits, and our SEO-friendly website product.
 Use a {tone} tone and tailor it to the {audience}, leveraging the context provided.
 Include a question to engage readers, a call to action, and use these high-performing examples for inspiration: {feedback_context}
 Context: {context}
@@ -78,8 +78,8 @@ Context: {context}
 )
 
 linkedin_content_prompt = PromptTemplate(
-    input_variables=["content_topic", "tone", "professional_insight", "context", "feedback_context"],
-    template="""Draft a professional LinkedIn post about {content_topic}, highlighting SEO importance, conversion benefits, and our SEO-friendly website product.
+    input_variables=["content_topic", "tone", "professional_insight", "length", "context", "feedback_context"],
+    template="""Draft a {length} professional LinkedIn post about {content_topic}, highlighting SEO importance, conversion benefits, and our SEO-friendly website product.
 Maintain a {tone} tone, integrate {professional_insight}, and use the context provided.
 Include highlights, stats (if available in context), an inspiring close, and use these high-performing examples for inspiration: {feedback_context}
 Context: {context}

@@ -91,10 +91,11 @@ def get_rag_chain(index_path: str = None, use_case: str = "content", platform: s
             Content Topic: {content_topic}
             Tone: {tone}
             Professional Insight: {professional_insight}
+Length: {length}
             High-performing examples: {feedback_context}
             
             Generate a LinkedIn post based on the above details. IMPORTANT: Include the exact word 'SEO' (uppercase) at least once to ensure SEO keyword presence.""",
-            input_variables=["context", "content_topic", "tone", "professional_insight", "feedback_context"]
+            input_variables=["context", "content_topic", "tone", "professional_insight", "length", "feedback_context"]
         )
     elif platform == "instagram":
         prompt = PromptTemplate(
@@ -104,10 +105,11 @@ def get_rag_chain(index_path: str = None, use_case: str = "content", platform: s
             Content Topic: {content_topic}
             Tone: {tone}
             Persona: {persona}
+Length: {length}
             High-performing examples: {feedback_context}
             
             Generate an Instagram caption based on the above details. IMPORTANT: Include the exact word 'SEO' (uppercase) at least once to ensure SEO keyword presence.""",
-            input_variables=["context", "content_topic", "tone", "persona", "feedback_context"]
+            input_variables=["context", "content_topic", "tone", "persona", "length", "feedback_context"]
         )
     elif platform == "facebook":
         prompt = PromptTemplate(
@@ -117,10 +119,11 @@ def get_rag_chain(index_path: str = None, use_case: str = "content", platform: s
             Content Topic: {content_topic}
             Tone: {tone}
             Audience: {audience}
+Length: {length}
             High-performing examples: {feedback_context}
             
             Generate a Facebook post based on the above details. IMPORTANT: Include the exact word 'SEO' (uppercase) at least once to ensure SEO keyword presence.""",
-            input_variables=["context", "content_topic", "tone", "audience", "feedback_context"]
+            input_variables=["context", "content_topic", "tone", "audience", "length", "feedback_context"]
         )
     elif platform == "all" and use_case == "strategy":
         prompt = PromptTemplate(
@@ -181,6 +184,7 @@ def get_rag_chain(index_path: str = None, use_case: str = "content", platform: s
             "content_goals": input_dict.get("content_goals", ""),
             "brand_summary": input_dict.get("brand_summary", ""),
             "topic_list": input_dict.get("topic_list", ""),
+            "length": input_dict.get("length", "medium"),
             "feedback_context": input_dict.get("feedback_context", ""),
             "query": query
         }

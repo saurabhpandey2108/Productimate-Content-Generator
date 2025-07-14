@@ -2,6 +2,8 @@ __pycache__/
 *.pyc 
 data/output/ 
 uv.lock 
-faiss_index/ 
+src/faiss_index/
+app/style.css
+app/__pycache__/ 
 tmp_*.pdf 
 .env 

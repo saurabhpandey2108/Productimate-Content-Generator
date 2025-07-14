@@ -33,6 +33,7 @@ class SocialMediaAgent:
             "content_goals": kwargs.get("content_goals", ""),
             "brand_summary": kwargs.get("brand_summary", ""),
             "topic_list": kwargs.get("topic_list", ""),
+            "length": kwargs.get("length", "medium"),
             "context": kwargs.get("context", ""),
             "feedback_context": feedback_text
         }

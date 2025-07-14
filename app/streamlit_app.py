@@ -3,9 +3,19 @@ import requests
 from functools import partial
 import os
 
-API_URL = os.getenv("CONTENT_API_URL", "http://localhost:8000")
+API_URL = os.getenv("CONTENT_API_URL", "https://productimate-content-generator.onrender.com")
 
 st.set_page_config(page_title="Productimate Content Generator", layout="wide")
+# ---- Custom CSS for cleaner design ----
+custom_css = """
+<style>
+/* Center headers & add subtle gradient */
+.main h1, .main h2, .main h3 {text-align:center; background: -webkit-linear-gradient(45deg,#3b82f6,#ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+/* Rounded text areas */
+textarea {border-radius:8px !important;}
+</style>
+"""
+st.markdown(custom_css, unsafe_allow_html=True)
 
 
 
@@ -67,8 +77,9 @@ choice = st.tabs(TABS)
 
 # Tab 0 – Instagram
 with choice[0]:
-    st.header("Instagram Caption Generator")
+    st.header("📸 Instagram Caption Generator")
     topic = st.text_input("Content Topic")
+    length = st.selectbox("Desired Length", ["short", "medium", "long"], index=1)
     tone = st.selectbox("Tone", ["neutral", "fun", "professional", "inspirational"])
     persona = st.text_input("Persona", placeholder="e.g. Startup Founder")
 
@@ -79,7 +90,7 @@ with choice[0]:
     generate_clicked = st.button("Generate Instagram Caption", disabled=st.session_state.ig_generating)
     if generate_clicked:
         st.session_state.ig_generating = True
-        payload = {"content_topic": topic, "tone": tone, "persona": persona}
+        payload = {"content_topic": topic, "tone": tone, "persona": persona, "length": length}
         with st.spinner("Generating caption ..."):
             r = requests.post(f"{API_URL}/generate_instagram_content/", json=payload)
         st.session_state.ig_generating = False
@@ -104,8 +115,9 @@ with choice[0]:
 
 # Tab 1 – Facebook
 with choice[1]:
-    st.header("Facebook Post Generator")
+    st.header("📘 Facebook Post Generator")
     topic = st.text_input("Content Topic", key="fb_topic")
+    length_fb = st.selectbox("Desired Length", ["short", "medium", "long"], index=1, key="fb_len")
     tone = st.selectbox("Tone", ["neutral", "casual", "professional"], key="fb_tone")
     audience = st.text_input("Audience", key="fb_aud")
 
@@ -115,7 +127,7 @@ with choice[1]:
     fb_clicked = st.button("Generate Facebook Post", disabled=st.session_state.fb_generating)
     if fb_clicked:
         st.session_state.fb_generating = True
-        payload = {"content_topic": topic, "tone": tone, "audience": audience}
+        payload = {"content_topic": topic, "tone": tone, "audience": audience, "length": length_fb}
         with st.spinner("Generating post ..."):
             r = requests.post(f"{API_URL}/generate_facebook_content/", json=payload)
         st.session_state.fb_generating = False
@@ -140,8 +152,9 @@ with choice[1]:
 
 # Tab 2 – LinkedIn
 with choice[2]:
-    st.header("LinkedIn Post Generator")
+    st.header("💼 LinkedIn Post Generator")
     topic = st.text_input("Content Topic", key="li_topic")
+    length_li = st.selectbox("Desired Length", ["short", "medium", "long"], index=1, key="li_len")
     tone = st.selectbox("Tone", ["neutral", "thought-leadership", "professional"], key="li_tone")
     insight = st.text_input("Professional Insight", key="li_insight")
 
@@ -151,7 +164,7 @@ with choice[2]:
     li_clicked = st.button("Generate LinkedIn Post", disabled=st.session_state.li_generating)
     if li_clicked:
         st.session_state.li_generating = True
-        payload = {"content_topic": topic, "tone": tone, "professional_insight": insight}
+        payload = {"content_topic": topic, "tone": tone, "professional_insight": insight, "length": length_li}
         with st.spinner("Generating post ..."):
             r = requests.post(f"{API_URL}/generate_linkedin_content/", json=payload)
         st.session_state.li_generating = False
@@ -189,7 +202,7 @@ with choice[2]:
 
 # Tab 3 – Content Strategy
 with choice[3]:
-    st.header("Content Strategy Generator")
+    st.header("🧠 Content Strategy Generator")
     platforms = st.multiselect("Platforms", ["instagram", "facebook", "linkedin", "website"])
     goals = st.text_area("Content Goals", placeholder="Increase brand awareness, drive traffic, ...")
 
@@ -215,7 +228,7 @@ with choice[3]:
 
 # Tab 4 – Calendar
 with choice[4]:
-    st.header("7-Day Content Calendar Generator")
+    st.header("🗓️ 7-Day Content Calendar Generator")
     summary = st.text_area("Brand Summary")
     topics = st.text_input("Comma-separated Topic List", placeholder="SEO Basics, Product Demo, Industry Trends")
 
@@ -241,7 +254,7 @@ with choice[4]:
 
 # Tab 5 – Feedback / Regenerate
 with choice[5]:
-    st.header("Submit Feedback & Regenerate")
+    st.header("⭐ Submit Feedback & Regenerate")
     with st.form("feedback_form"):
         output_id = st.text_input("Output ID")
         rating = st.slider("Rating", 1, 5, 4)

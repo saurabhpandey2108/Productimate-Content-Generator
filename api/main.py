@@ -90,6 +90,7 @@ async def generate_instagram_content(request: InstagramPostRequest):
         metadata = {
             "output_id": output_id,
             "platform": "instagram",
+            "length": request.length,
             "content_topic": request.content_topic,
             "tone": request.tone,
             "persona": request.persona,
@@ -117,6 +118,7 @@ async def generate_facebook_content(request: FacebookPostRequest):
         metadata = {
             "output_id": output_id,
             "platform": "facebook",
+            "length": request.length,
             "content_topic": request.content_topic,
             "tone": request.tone,
             "audience": request.audience,
@@ -144,6 +146,7 @@ async def generate_linkedin_content(request: LinkedInPostRequest):
         metadata = {
             "output_id": output_id,
             "platform": "linkedin",
+            "length": request.length,
             "content_topic": request.content_topic,
             "tone": request.tone,
             "professional_insight": request.professional_insight,
